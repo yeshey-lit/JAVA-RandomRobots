@@ -1,0 +1,86 @@
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.stage.Stage;
+
+import java.util.Random;
+
+import static javafx.application.Application.launch;
+
+/**
+ * This assignment is on drawing robots and generating random numbers for robots.
+ * Referee is selected randomly from the teams.
+ *
+ * @author Yeshey Dema (000824243)
+ */
+public class ThreeTeams extends Application {
+
+    /**
+     * Start method (use this instead of main).
+     *
+     * @param stage The FX stage to draw on
+     * @throws Exception
+     */
+    @Override
+    public void start(Stage stage) throws Exception {
+        Group root = new Group();
+        Scene scene = new Scene(root);
+        Canvas canvas = new Canvas(650, 500); // Set canvas Size in Pixels
+        stage.setTitle("Robot Olympics"); // Set window title
+        root.getChildren().add(canvas);
+        stage.setScene(scene);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Create Three team objects
+        Team team1 = new Team(50,50,"Bhutan",Color.YELLOWGREEN);
+        Team team2 = new Team(50,200,"Knowhere",Color.PINK);
+        Team team3 = new Team(50, 350,"Titan", Color.CRIMSON);
+
+        // Draw teams
+        team1.draw(gc);
+        team2.draw(gc);
+        team3.draw(gc);
+
+        // Select Referee from teams
+        int random = (int) (Math.random()*3); // Generate random numbers upto 3
+        // Number generated referenced to team color and name
+        if(random == 0){
+            Player ref = new Player(530, 200,Color.YELLOWGREEN);
+            ref.draw(gc);
+            gc.setFill(Color.BLACK);
+            gc.fillText("Head: Bhutan",520,300);
+        }
+        else if(random == 1){
+            Player ref = new Player(530, 200,Color.PINK);
+            ref.draw(gc);
+            gc.setFill(Color.BLACK);
+            gc.fillText("Head: Knowhere",520,300);
+        }
+        else if(random == 2){
+            Player ref = new Player(530, 200,Color.CRIMSON);
+            ref.draw(gc);
+            gc.setFill(Color.BLACK);
+            gc.fillText("Head: Titan",520,300);
+        }
+
+        //Display my name on screen
+        gc.setFont(Font.font("", FontPosture.REGULAR,10));
+        gc.fillText("Yeshey Dema (000824243)",520,490);
+        // YOUR CODE STOPS HERE
+        stage.show();
+    }
+
+    /**
+     * The actual main method that launches the app.
+     *
+     * @param args unused
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
