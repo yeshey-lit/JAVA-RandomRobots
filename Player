@@ -1,0 +1,73 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
+/**
+ * Player assemble with head and wheel
+ * @author Yeshey Dema (000824243)
+ */
+public class Player {
+    private double x;
+    private double y;
+    private Color color;
+    private String title;
+    private int average= (int) (Math.random()*99) + 1; //Random number generation
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param color
+     */
+
+    public Player(double x, double y, Color color) {
+        this(x,y,color,"");
+        this.average = getAverage();
+
+    }
+
+    public Player(double x, double y, Color color, String title) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.title = title;
+        //Initializing average to 100
+        if(this.average < 100){
+            this.average = getAverage();
+        }
+        else{
+            this.average = 100;
+        }
+    }
+
+    public int getAverage(){
+        return average;
+    }
+
+    public void draw(GraphicsContext gc){
+        //Body
+        gc.setFill(color);
+        //gc.fillOval(x, y, 70, 70);
+        gc.fillArc(x,y-80,70,160,180,180, ArcType.OPEN);
+
+        //Head and wheel
+        Head hd = new Head(x+20, y-30);
+        Wheel w1 = new Wheel(x-10, y+20);
+        Wheel w2 = new Wheel(x+65, y+20);
+
+        //Draw head and wheel
+        hd.draw(gc);
+        w1.draw(gc);
+        w2.draw(gc);
+
+        //Number plate on body
+        gc.setFont(Font.font("",FontWeight.BOLD,15));   //Font size with default font
+        gc.setFill(Color.BLACK);
+        gc.fillRect(x+20,y+25,30,20);
+        gc.setFill(Color.SKYBLUE);
+        gc.fillText(String.valueOf(average), x+28, y+40);
+
+    }
+}
