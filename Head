@@ -1,0 +1,40 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
+
+/**
+ * Head drawing for the player
+ * @author Yeshey Dema (000824243)
+ */
+public class Head {
+    private double x;
+    private double y;
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
+
+    public Head(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Head and eyes positions with size
+     * @param gc
+     */
+    public void draw(GraphicsContext gc){
+        //Head
+        gc.setFill(Color.BLACK);
+        gc.setStroke(Color.BLACK);
+        //gc.fillOval(x,y,30,30);
+        gc.fillArc(x-10,y,50,60,0,180, ArcType.OPEN);
+
+        //Eyes
+        gc.setFill(Color.SKYBLUE);
+        gc.fillOval(x+5,y+10,8,12);
+        gc.fillOval(x+20,y+10,8,12);
+    }
+}
