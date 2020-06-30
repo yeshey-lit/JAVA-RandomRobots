@@ -1,0 +1,54 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
+/**
+ * Creating Players
+ */
+
+public class Team {
+    private double x;
+    private double y;
+    private String name;
+    private Color color;
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param name
+     * @param color
+     */
+
+    public Team(double x, double y, String name, Color color) {
+        this.x = x;
+        this.y = y;
+        this.name = name;
+        this.color = color;
+    }
+
+    /**
+     * Draw Players
+     * @param gc
+     */
+    public void draw(GraphicsContext gc){
+        //Create three Player objects
+        Player player1 = new Player(x, y, color, name);
+        Player player2 = new Player(x + 120, y, color, name);
+        Player player3 = new Player(x + 240, y, color, name);
+
+        //Average calculation from three players
+        double teamAvg = (player1.getAverage() + player2.getAverage() + player3.getAverage()) / 3.0;
+
+        //Draw Players
+        player1.draw(gc);
+        player2.draw(gc);
+        player3.draw(gc);
+
+        //Display player average
+        gc.setFont(Font.font("",FontWeight.NORMAL,15)); //Font size with default font
+        gc.setFill(Color.BLACK);
+        gc.fillText(String.format("%s (team average %.1f)", name, teamAvg), x, y + 100);
+    }
+}
