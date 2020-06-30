@@ -1,0 +1,31 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+/**
+ * Drawing of wheel for player
+ * @author Yeshey Dema (000824243)
+ */
+public class Wheel {
+    private double x;
+    private double y;
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
+
+    public Wheel(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Oval wheel size
+     * @param gc
+     */
+    public void draw(GraphicsContext gc){
+        gc.setFill(Color.BLACK);
+        gc.fillOval(x,y,15,60);
+    }
+}
